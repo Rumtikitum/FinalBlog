@@ -1,14 +1,32 @@
 const router = require('express').Router();
-const { User } = require('../models/')
+const { User, Article } = require('../models/')
 const sequelize = require('../config/connection');
 //const { Post, User, Comment, Vote } = require('../models');
 
 // get all posts for homepage
 router.get('/', async (req, res) => {
-  console.log('======================');
-    res.render('homepage', {
-        loggedIn: req.session.loggedIn
-      });
+    try {
+        // Get all Articles and JOIN with user data
+        const articledata = await Article.findAll({
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        });
+    
+        // Serialize data so the template can read it
+        const articles = articledata.map((article) => article.get({ plain: true }));
+    
+        // Pass serialized data and session flag into template
+        res.render('homepage', { 
+          loggedIn: req.session.loggedIn,
+          articles, 
+        });
+      } catch (err) {
+        res.status(500).json(err);
+      }
     })
 
 router.get('/login', (req, res) => {
