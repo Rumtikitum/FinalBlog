@@ -5,9 +5,14 @@ const userData = [
         username: 'Rumtikitum',
         email: 'email@gmail.com',
         password: 'password'
+    },
+    {
+        username: 'Rumtikitumz',
+        email: 'email2@gmail.com',
+        password: 'password'
     }
 ];
 
-const seedItems = () => User.bulkCreate(userData);
+const seedUser = () => User.bulkCreate(userData);
 
-module.exports = seedItems;
+module.exports = seedUser;

@@ -1,16 +1,13 @@
-{{#each articles as |article|}}
-
-<div class="card mb-2">
-            <div class="card-body ms-3">
-                
-              <h5 class="card-title bg-primary text-light p-3"><a class='text-light' href="/articles/{{id}}">{{article.title}}</a></h5>
-              <div class="card-header">
-                Posted by {{user.user_name}} on {{format_date article.createdAt}}
-              </div>
-              <p class="card-text ps-4 pt-4">{{article.content}}</p>
+            <div class="col">
+              <h3 class="alert alert-danger">Articles<i class="fas fa-table" style="margin-left: 5px;"></i></h3>
             </div>
-          </div>
-
-{{else}}
-    <p>nothing here</p>
-{{/each}}
+             {{#each articles as |article| }}
+              <div><strong>Article Name: {{article.title}} </strong></div>
+              <div><strong>Content: </strong>{{article.content}}</div>
+              <div><strong>By: </strong> {{user.username}}</div>
+              <div>=======================================================</div>
+              {{else}}
+                <div>
+                  nothing here
+                </div>
+              {{/each}}
